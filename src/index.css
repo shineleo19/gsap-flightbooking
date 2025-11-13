@@ -1,0 +1,48 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ensure the page stretches full height */
+html, body, #root {
+  height: 100%;
+}
+
+/* global background that covers the whole page */
+body {
+  margin: 0;
+  background-image: url("/mist2.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed; /* keeps background fixed while scrolling */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Optional: make sections transparent so background shows through */
+section {
+  background: transparent;
+}
+
+/* per-slide background utilities */
+.slide-bg {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  /* keep sections transparent so page content sits above the bg */
+  background-attachment: fixed;
+}
+
+/* individual slide images */
+.slide-bg-1 { background-image: url("/mist2.jpg"); }
+.slide-bg-2 { background-image: url("/mist2.jpg"); }
+.slide-bg-3 { background-image: url("/mist2.jpg"); }
+
+/* optional overlay to tint the slide background */
+.slide-overlay {
+  position: absolute;
+  inset: 0;
+  background-color: rgba(5, 106, 108, 0.266); /* tweak color/opacity */
+  pointer-events: none;
+  z-index: 0;
+}
