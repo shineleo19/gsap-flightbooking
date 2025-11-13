@@ -1,25 +1,42 @@
-SkyFly — Animated Flight Booking (starter)
-=========================================
+# ✈️ SkyFly – Modern Flight Booking Website
 
-What's included
-- Vite + React starter
-- Tailwind CSS setup files (config + postcss)
-- GSAP with ScrollTrigger + MotionPath usage example
-- Simple hero with plane motion and looping clouds
-- Multiple sections to demonstrate scroll behavior
+A sleek and interactive **flight booking platform** inspired by next-gen travel UIs.  
+Built with **React**, **Vite**, **Tailwind CSS**, and **GSAP**, SkyFly delivers smooth animations, elegant layouts, and a premium booking experience.
 
-Setup
-1. Node.js >= 18 recommended.
-2. Run:
-   npm install
-   npm run dev
+---
 
-Notes
-- Tailwind, PostCSS and Vite are wired in package.json devDependencies. If you prefer yarn, use yarn instead.
-- The project uses local SVGs (public/*.svg). Replace them with high-quality assets for production.
-- MotionPath is used for demo path animation; tweak the coordinates inside src/components/Hero.jsx.
+## 🌟 Features
 
-Deploy
-- Deploy to Vercel by connecting the repository or simply drag & drop the built output (npm run build) into your host of choice.
+- 🛫 **Dynamic Hero Section** with animated airplane (GSAP scroll animation)
+- 🌤️ **Cloud Parallax Effects** that move subtly with scrolling
+- 💳 **Interactive Booking Form** (From / To / Dates / Search)
+- 🌍 **Top Flight Deals** and **Popular Airlines** sections
+- 🏨 **Hotel Booking Cards** with hover effects
+- 💨 Smooth page transitions powered by **GSAP**
+- 💎 Modern glassmorphism & soft gradient UI
+- 📱 Fully responsive (Desktop / Tablet / Mobile)
 
-Enjoy! ✈️
+---
+
+## 🧩 Tech Stack
+
+| Technology | Description |
+|-------------|-------------|
+| **React + Vite** | Fast and modern frontend framework |
+| **Tailwind CSS** | Utility-first CSS framework for modern UIs |
+| **GSAP** | Animation library for smooth motion effects |
+| **Framer Motion** | For micro animations and transitions |
+| **Lucide React** | Icon library for travel and interface icons |
+
+---
+
+## 🛠️ Installation
+
+### 1. Clone the repository
+```bash
+1.git clone <url>
+2.cd skyfly
+3.npm install
+4.npm run dev
+
+
