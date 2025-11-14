@@ -11,6 +11,10 @@ const sampleDeals = [
   { id: 2, route: "SFO → TYO", duration: "11h 30m", price: 599, airline: "Nimbus", date: "Sep 8" },
   { id: 3, route: "MIA → CDG", duration: "9h 5m", price: 419, airline: "Skyline", date: "Oct 2" },
   { id: 4, route: "LAX → HND", duration: "11h 35m", price: 579, airline: "Pacifica", date: "Nov 12" },
+  { id: 5, route: "ORD → FRA", duration: "8h 45m", price: 459, airline: "TransGlobal", date: "Dec 5" },
+  { id: 6, route: "BOS → AMS", duration: "7h 20m", price: 389, airline: "AeroLink", date: "Jan 15" },
+  { id: 7, route: "DFW → BCN", duration: "9h 15m", price: 429, airline: "JetStream", date: "Feb 20" },
+  { id: 8, route: "SEA → SYD", duration: "15h 50m", price: 899, airline: "Oceanic Air", date: "Mar 10" },
 ];
 
 export default function FlightDeal() {
@@ -99,7 +103,7 @@ export default function FlightDeal() {
         .sf-header .btn{margin-left:10px;padding:8px 12px;border-radius:10px;border:0;cursor:pointer}
         .btn.primary{background:var(--accent);color:white}
         .btn.ghost{background:transparent;border:1px solid rgba(0,0,0,0.06)}
-        .sf-main{max-width:1100px;margin:8px auto;padding:8px;width:92%;flex:1}
+        .sf-main{max-width:1100px;margin:100px auto;padding:8px;width:92%;flex:1;top:10px}
         .sf-hero{display:flex;gap:12px;align-items:center;padding:12px;border-radius:14px}
         .hero-left{flex:1;min-width:240px}
         h1{font-size:28px;margin:6px 0}
