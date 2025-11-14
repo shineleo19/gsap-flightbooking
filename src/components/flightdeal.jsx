@@ -1,10 +1,10 @@
 // filepath: d:\skyfly\src\components\flightdeal.jsx
 import React from "react";
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useGSAP } from '@gsap/react';
 
-/**
- * SimpleFlightDeal - a minimal, responsive flight-deals layout.
- * Drop this file in your components folder (replaces the existing one).
- */
+gsap.registerPlugin(ScrollTrigger);
 
 const sampleDeals = [
   { id: 1, route: "NYC → LON", duration: "7h 10m", price: 329, airline: "Aurora Air", date: "Aug 24" },
@@ -14,9 +14,24 @@ const sampleDeals = [
 ];
 
 export default function FlightDeal() {
-  return (
-    <div className="sf-page">
+  useGSAP(() => {
+    // horizontal scroll-driven animation for the bottom cloud
+    gsap.to('.bottom-cloud', {
+      scrollTrigger: {
+        trigger: '.sf-page',
+        start: "top bottom",     // when .sf-page top hits bottom of viewport
+        end: "bottom top",       // when .sf-page bottom hits top of viewport
+        scrub: true,
+        invalidateOnRefresh: true
+      },
+      x:-100,
+      y:100,
+      ease: 'none',
+    })
+  }, []);
 
+  return (
+    <div className="sf-page"> 
       <main className="sf-main">
         <section className="sf-hero">
           <div className="hero-left">
@@ -28,12 +43,6 @@ export default function FlightDeal() {
               <input aria-label="To" placeholder="To" />
               <button className="btn primary w-20 h-10 rounded-lg">Search</button>
             </div>
-          </div>
-
-          <div className="hero-right" aria-hidden>
-            <svg viewBox="0 0 200 100" className="plane-svg" xmlns="http://www.w3.org/2000/svg">
-              <path d="M10 50 L60 45 L90 30 L120 25 L180 30 L150 50 L120 60 L90 70 L60 65 Z" fill="#bfe9ff" stroke="#9fd7ff"/>
-            </svg>
           </div>
         </section>
 
@@ -62,6 +71,11 @@ export default function FlightDeal() {
         </section>
       </main>
 
+      <img
+        src="cloud 6.PNG"
+        alt="cloud 6"
+        className="bottom-cloud"
+      />
 
       <style>{`
         :root{
@@ -70,14 +84,23 @@ export default function FlightDeal() {
           font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
         }
         *{box-sizing:border-box}
-        .sf-page{min-height:100vh;display:flex;flex-direction:column;background:linear-gradient(180deg,#f6fbff,#eaf6ff);color:#043049}
+        /* ensure the flight deals page fills the viewport */
+        .sf-page{
+          min-height:91vh;
+          display:flex;
+          flex-direction:column;
+          background:linear-gradient(180deg,#f6fbff,#eaf6ff);
+          color:#043049;
+          position:relative;
+          overflow:hidden; /* avoid overflow from decorative clouds */
+        }
         .sf-header{display:flex;justify-content:space-between;align-items:center;padding:18px 28px}
         .brand{font-weight:700;font-size:18px}
         .sf-header .btn{margin-left:10px;padding:8px 12px;border-radius:10px;border:0;cursor:pointer}
         .btn.primary{background:var(--accent);color:white}
         .btn.ghost{background:transparent;border:1px solid rgba(0,0,0,0.06)}
-        .sf-main{max-width:1100px;margin:16px auto;padding:12px;width:92%}
-        .sf-hero{display:flex;gap:20px;align-items:center;padding:20px;border-radius:14px}
+        .sf-main{max-width:1100px;margin:8px auto;padding:8px;width:92%;flex:1}
+        .sf-hero{display:flex;gap:12px;align-items:center;padding:12px;border-radius:14px}
         .hero-left{flex:1;min-width:240px}
         h1{font-size:28px;margin:6px 0}
         .accent{color:var(--accent)}
@@ -85,9 +108,8 @@ export default function FlightDeal() {
         .search{display:flex;gap:8px;align-items:center}
         .search input{padding:10px 12px;border-radius:10px;border:1px solid rgba(6,22,30,0.06);flex:1;outline:none}
         .hero-right{width:320px;display:flex;justify-content:center;align-items:center}
-        .plane-svg{width:260px;height:auto;opacity:0.95}
 
-        .deals-section{margin-top:20px}
+        .deals-section{margin-top:12px}
         .deals-section h2{margin-bottom:10px}
         .deals-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
         .deal-card{background:white;padding:14px;border-radius:12px;box-shadow:0 8px 24px rgba(10,30,50,0.06);display:flex;flex-direction:column;gap:12px}
@@ -100,7 +122,14 @@ export default function FlightDeal() {
         .pill{background:rgba(42,157,244,0.08);padding:6px 10px;border-radius:999px;color:var(--muted);font-size:13px}
         .btn.subtle{background:transparent;border:1px solid rgba(0,0,0,0.06);padding:8px 10px;border-radius:8px;cursor:pointer}
 
-        .sf-footer{text-align:center;padding:18px 10px;color:var(--muted);margin-top:auto}
+        /* keep decorative cloud visible but within viewport bounds */
+        .bottom-cloud{
+          bottom: -50px;
+          left: -150px;
+          width: 360px;
+          position: absolute;
+          
+        }
 
         @media (max-width:800px){
           .sf-hero{flex-direction:column-reverse}

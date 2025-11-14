@@ -34,7 +34,7 @@ export default function Clouds() {
         <img
           src="/cloud 4.PNG"
           alt="cloud 4 "
-          className="move-cloud absolute left-0 top-0 w-48 md:w-72 lg:w-96 z-25 pointer-events-none"
+          className="move-cloud absolute left-0 top-10 w-48 md:w-72 lg:w-96 z-50 pointer-events-none"
           style={{ left: '-10vw' }}
         />  
         <img
@@ -57,7 +57,7 @@ export default function Clouds() {
         <img
           src="/cloud 2.png"
           alt="cloud 2"
-          className="left-cloud absolute left-40 transform -translate-y-1/2  bottom-8 md:bottom-12 lg:bottom-20 w-40 md:w-96 lg:w-[350px] z-50 pointer-events-none"
+          className="left-cloud absolute left-0  bottom-8 md:bottom-12 lg:bottom-20 w-40 md:w-96 lg:w-[350px] z-50 pointer-events-none"
         />
       </section>
     </>

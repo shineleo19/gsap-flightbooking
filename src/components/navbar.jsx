@@ -17,10 +17,14 @@ export default function Navbar() {
   }, [])
 
   const scrollToSection = (id) => {
-    const element = document.getElementById(id)
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' })
-    }
+    const el = document.getElementById(id)
+    if (!el) return
+    // account for fixed navbar height so target isn't hidden behind it
+    const nav = document.querySelector('nav')
+    const navHeight = nav ? nav.offsetHeight : 72
+    const extraOffset = 0 // small gap
+    const top = el.getBoundingClientRect().top + window.pageYOffset - navHeight - extraOffset
+    window.scrollTo({ top, behavior: 'smooth' })
   }
 
   return (
@@ -45,18 +49,18 @@ export default function Navbar() {
           </li>
           <li>
             <button
-              onClick={() => scrollToSection('next')}
+              onClick={() => scrollToSection('deals')}
               className="text-sky-900 hover:text-sky-600 transition-colors font-medium"
             >
-              Discover
+              deals
             </button>
           </li>
           <li>
             <button
-              onClick={() => scrollToSection('deals')}
+              onClick={() => scrollToSection('next')}
               className="text-sky-900 hover:text-sky-600 transition-colors font-medium"
             >
-              Deals
+              Discover
             </button>
           </li>
           <li>
@@ -132,6 +136,17 @@ export default function Navbar() {
           ul {
             display: none;
           }
+        }
+
+        :root{
+          --nav-height: 72px; /* match navbar height; adjust if needed */
+        }
+
+        /* Optional: make sections transparent so background shows through */
+        section {
+          background: transparent;
+          /* ensures anchor/scrollIntoView leaves the section visible below the fixed navbar */
+          scroll-margin-top: var(--nav-height);
         }
       `}</style>
     </nav>
