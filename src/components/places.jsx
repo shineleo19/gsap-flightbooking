@@ -26,6 +26,20 @@ const places = [
       "Famous statue overlooking Rio de Janeiro, offering panoramic city and beach views.",
     image: "/place-img/christ- brazil.jpg",
   },
+  {
+    name: "Mount fuji",
+    country: "Japan",
+    description:
+      "Iconic snow-capped volcano, a symbol of Japan, popular for hiking and photography.",
+    image: "/place-img/fuji.png",
+  },
+  {
+    name: "Great Wall Of China",
+    country: "China",
+    description:
+      "Ancient fortification stretching thousands of miles, showcasing China's rich history and architectural marvels.",
+    image: "/place-img/image.png",
+  },
 ];
 
 export default function DestinationSlider() {
@@ -178,9 +192,11 @@ export default function DestinationSlider() {
         }
 
         .detail-panel h1 {
+        font-family: 'Arial Black', sans-serif;
           font-size: 40px;
           font-weight: bold;
           margin-top: -10px;
+          width: 450px;
           color: #222;
         }
 
@@ -196,6 +212,7 @@ export default function DestinationSlider() {
           color: #333;
           line-height: 1.5;
           font-weight: bold;
+          width: 370px;
         }
       `}</style>
     </section>

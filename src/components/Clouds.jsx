@@ -20,11 +20,6 @@ export default function Clouds() {
     tl.to('.left-cloud', { y: -200 }, 0)
       .to('.right-cloud', { y: 200 }, 0)
       .to('.move-cloud', { y: 150 }, 0)
-
-    // continuous left -> right moving cloud
-    // use fromTo and linear ease so movement is steady and loops
-
-   
   }, []);
 
   return (
