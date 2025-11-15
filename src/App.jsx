@@ -4,7 +4,6 @@ import Hero from './components/Hero'
 import Clouds from './components/Clouds'
 import FlightDeal from './components/flightdeal'
 import Explore from './components/Explore'
-import Section from './components/Section'
 import Places from './components/places'
 
 export default function App() {

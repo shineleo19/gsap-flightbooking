@@ -10,21 +10,21 @@ const places = [
     country: "Greece",
     description:
       "Iconic white-washed buildings with blue domes, stunning sunsets, and crystal-clear waters.",
-    image: "/santorini.jpeg",
+    image: "/place-img/santorini.jpeg",
   },
   {
     name: "london brige",
     country: "United Kingdom",
     description:
       " Historic bridge over the River Thames, known for its iconic towers and panoramic city views.",
-    image: "/london-bridge.jpeg",
+    image: "/place-img/london-bridge.jpeg",
   },
   {
     name: "christ the redeemer",
     country: "Brazil",
     description:
       "Famous statue overlooking Rio de Janeiro, offering panoramic city and beach views.",
-    image: "/christ- brazil.jpg",
+    image: "/place-img/christ- brazil.jpg",
   },
 ];
 
@@ -84,7 +84,7 @@ export default function DestinationSlider() {
       <div className="side-control left">
         <h3>{places[(index - 1 + places.length) % places.length].name}</h3>
       </div>
-      <button onClick={prevSlide} className="rarrow-btn"><img src="/arrow.PNG" alt="" srcset="" /></button>
+      <button onClick={prevSlide} className="rarrow-btn"><img src="/asserts/arrow.PNG" alt="" srcset="" /></button>
       {/* MAIN IMAGE */}
       <div className="center-img">
         <img
@@ -100,7 +100,7 @@ export default function DestinationSlider() {
         <h3>{places[(index + 1) % places.length].name}</h3>
         
       </div>
-            <button onClick={nextSlide} className="larrow-btn"><img src="/rarrow.PNG" alt="" srcset="" /></button>
+            <button onClick={nextSlide} className="larrow-btn"><img src="/asserts/rarrow.PNG" alt="" srcset="" /></button>
 
       {/* DETAIL PANEL */}
       <div className="detail-panel" ref={detailRef}>

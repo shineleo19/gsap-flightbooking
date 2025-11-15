@@ -45,7 +45,7 @@ const Explore = () => {
             className="cocktail-img masked-img"
             role="img"
             aria-label="Explore image"
-            style={{ backgroundImage: 'url("/explore.jpg")' }}
+            style={{ backgroundImage: 'url("/place-img/explore.jpg")' }}
           />
 
           {/* RIGHT DESTINATIONS LIST */}
@@ -92,11 +92,11 @@ const Explore = () => {
 
         /* mask applied to the element using proper URL and vendor prefix */
         .masked-img {
-          -webkit-mask-image: url("/image.png");
+          -webkit-mask-image: url("/asserts/image.png");
           -webkit-mask-repeat: no-repeat;
           -webkit-mask-position: center;
           -webkit-mask-size: 50%;
-          mask-image: url("/image.png");
+          mask-image: url("/asserts/image.png");
           mask-repeat: no-repeat;
           mask-position: center;
           mask-size: 50%;

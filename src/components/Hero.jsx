@@ -72,7 +72,7 @@ export default function Hero() {
       }}
     >
       <img
-        src="/plane.png"
+        src="/asserts/plane.png"
         alt="plane"
         className="plane absolute top-1/2 transform -translate-y-1/2 w-36 md:w-48 lg:w-64 z-50 pointer-events-none"
         style={{ left: '-17vw' }}

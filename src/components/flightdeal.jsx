@@ -76,7 +76,7 @@ export default function FlightDeal() {
       </main>
 
       <img
-        src="cloud 6.PNG"
+        src="/place-img/cloud 6.PNG"
         alt="cloud 6"
         className="bottom-cloud"
       />
