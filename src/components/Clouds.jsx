@@ -20,7 +20,8 @@ export default function Clouds() {
     tl.to('.left-cloud', { y: -200 }, 0)
       .to('.right-cloud', { y: 200 }, 0)
       .to('.move-cloud', { y: 150 }, 0)
-  }, []);
+  }, 
+  []);
 
   return (
     <>
@@ -47,12 +48,17 @@ export default function Clouds() {
         <img
           src="/cloud-img/cloud 1.png"
           alt="cloud 1"
-          className="right-cloud absolute right-4 top-4 md:top-12 lg:top-12 w-40 md:w-72 lg:w-96 z-50 pointer-events-none"
+          className="right-cloud absolute  right-0 top-4 md:top-12 lg:top-12 w-40 md:w-72 lg:w-96 z-50 pointer-events-none"
         />
         <img
           src="/cloud-img/cloud 2.png"
           alt="cloud 2"
           className="left-cloud absolute left-0  bottom-8 md:bottom-12 lg:bottom-20 w-40 md:w-96 lg:w-[350px] z-50 pointer-events-none"
+        />
+        <img
+          src="/cloud-img/cloud 7.PNG"
+          alt="cloud 7"
+          className=" move-cloud absolute right-20 bottom-64 z-50 pointer-events-none"
         />
       </section>
     </>

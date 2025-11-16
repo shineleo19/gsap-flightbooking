@@ -6,6 +6,7 @@
 /* ensure the page stretches full height */
 html, body, #root {
   height: 100%;
+  overflow-x: visible;
 }
 
 /* global background that covers the whole page */

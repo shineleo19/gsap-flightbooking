@@ -19,7 +19,7 @@ const Explore = () => {
         start,
         end: "bottom center",
         scrub: 1.5,
-		pin: true
+		    pin: true,
       }
     });
 
@@ -45,7 +45,7 @@ const Explore = () => {
             className="cocktail-img masked-img"
             role="img"
             aria-label="Explore image"
-            style={{ backgroundImage: 'url("/place-img/explore.jpg")' }}
+            style={{ backgroundImage: 'url("https://picsum.photos/600/400")' }}
           />
 
           {/* RIGHT DESTINATIONS LIST */}
@@ -55,12 +55,14 @@ const Explore = () => {
         {/* BOTTOM UNMASKED SECTION */}
         <div className="masked-container pt-10">
           <h2 className="will-fade  text-center text-4xl -mt-10 font-bold text-sky-800">Your Next Adventure Awaits</h2>
-
+          
           <div id="masked-content">
+            <img src="/asserts/statue of liberty.PNG" className="  absolute -left-0 top-72 w-60 " style={{Width:'200px'}}/>
             <h3 className="text-2xl font-semibold">Handpicked • Stunning • Unforgettable</h3>
             <p className="mt-2 text-gray-600">
               Book exclusive flight deals and discover breathtaking destinations curated just for you.
             </p>
+            <img src="/asserts/eiffel.JPG" className="  absolute -right-0 top-72 w-60 " style={{Width:'200px'}}/>
           </div>
         </div>
       </div>
@@ -82,7 +84,7 @@ const Explore = () => {
         }
 
         .cocktail-img {
-          width: 1080px;
+          width: 880px;
           height: 480px;
           margin-left:100px;
           background-size: cover;

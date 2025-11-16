@@ -93,7 +93,7 @@ export default function DestinationSlider() {
   };
 
   return (
-    <section className="destination-slider bg-sky-100">
+    <section id="places"className="destination-slider bg-sky-100">
       {/* LEFT ARROW + NAME */}
       <div className="side-control left">
         <h3>{places[(index - 1 + places.length) % places.length].name}</h3>

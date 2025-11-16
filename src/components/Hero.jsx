@@ -54,6 +54,7 @@ export default function Hero() {
     .to('.plane', {
       x: "110vw",
       duration: 0.1,
+      repeat: 0,
     },0)
     
   }, [])

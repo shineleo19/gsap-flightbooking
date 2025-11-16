@@ -17,6 +17,8 @@ export default function App() {
       </div>
       <div id="explore">
         <Explore />
+      </div>
+      <div id="discover">
         <Places />
       </div>
     </div>

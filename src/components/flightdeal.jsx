@@ -23,13 +23,24 @@ export default function FlightDeal() {
     gsap.to('.bottom-cloud', {
       scrollTrigger: {
         trigger: '.sf-page',
-        start: "top bottom",     // when .sf-page top hits bottom of viewport
-        end: "bottom top",       // when .sf-page bottom hits top of viewport
+        start: "20% bottom",     // when .sf-page top hits bottom of viewport
+        end: "top top",       // when .sf-page bottom hits top of viewport
         scrub: true,
-        invalidateOnRefresh: true
       },
-      x:-100,
-      y:100,
+      x:250,
+      y:-150,
+      ease: 'none',
+    })
+    
+    gsap.to('.rights-cloud', {
+      scrollTrigger: {
+        trigger: '.sf-page',
+        start: "20% bottom",     // when .sf-page top hits bottom of viewport
+        end: "top top",       // when .sf-page bottom hits top of viewport
+        scrub: true,
+      },
+      y:-180 ,
+      x: -270,
       ease: 'none',
     })
   }, []);
@@ -74,12 +85,18 @@ export default function FlightDeal() {
           </div>
         </section>
       </main>
-
+      
       <img
-        src="/place-img/cloud 6.PNG"
+        src="/cloud-img/cloud 6.PNG"
         alt="cloud 6"
         className="bottom-cloud"
       />
+      <img
+        src="/cloud-img/cloud 3.png"
+        alt="cloud 6"
+        className="rights-cloud"
+      />
+      
 
       <style>{`
         :root{
@@ -128,12 +145,22 @@ export default function FlightDeal() {
 
         /* keep decorative cloud visible but within viewport bounds */
         .bottom-cloud{
-          bottom: -50px;
-          left: -150px;
-          width: 360px;
+          bottom: -190px;
+          left: -400px;
+          width:520px;
           position: absolute;
-          
+          pointer-events: none;
         }
+
+        .rights-cloud{
+          width: 400px;
+          right: -330px;
+          bottom: -200px;
+          position: absolute;
+          pointer-events: none;
+          overflow-x: hidden;
+        }
+
 
         @media (max-width:800px){
           .sf-hero{flex-direction:column-reverse}

@@ -57,20 +57,21 @@ export default function Navbar() {
           </li>
           <li>
             <button
-              onClick={() => scrollToSection('next')}
-              className="text-sky-900 hover:text-sky-600 transition-colors font-medium"
-            >
-              Discover
-            </button>
-          </li>
-          <li>
-            <button
               onClick={() => scrollToSection('explore')}
               className="text-sky-900 hover:text-sky-600 transition-colors font-medium"
             >
               Explore
             </button>
           </li>
+          <li>
+            <button
+              onClick={() => scrollToSection('places')}
+              className="text-sky-900 hover:text-sky-600 transition-colors font-medium"
+            >
+              Discover
+            </button>
+          </li>
+          
         </ul>
 
         <button className="px-6 py-2 bg-sky-600 text-white rounded-full hover:bg-sky-700 transition-colors font-medium">
