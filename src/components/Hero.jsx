@@ -4,6 +4,7 @@ import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { MotionPathPlugin } from 'gsap/MotionPathPlugin'
 import { Timeline } from 'gsap/gsap-core';
+import { Link } from "react-router-dom";
 
 gsap.registerPlugin(ScrollTrigger, MotionPathPlugin)
 
@@ -83,7 +84,7 @@ export default function Hero() {
        <div className="max-w-4xl text-center z-10">
         <h1 className="title text-6xl md:text-7xl font-bold text-sky-900">Book Your Next Journey</h1>
         <p className="subtitle mt-6 text-2xl text-sky-700">Find flights, compare prices and fly with confidence.</p>
-        <button className="mt-6 px-6 py-3 bg-sky-600 text-white rounded-full shadow-lg">Start Booking</button>
+        <button className="mt-6 px-6 py-3 bg-sky-600 text-white rounded-full shadow-lg"><Link to="/booking" className="nav-link">Start Booking</Link></button>
       </div>
     </section>
   )

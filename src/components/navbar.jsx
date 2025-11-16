@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { Link } from "react-router-dom";
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -44,7 +45,7 @@ export default function Navbar() {
               onClick={() => scrollToSection('hero')}
               className="text-sky-900 hover:text-sky-600 transition-colors font-medium"
             >
-              Home
+              <Link to="/" className="nav-link">Home</Link>
             </button>
           </li>
           <li>
@@ -52,7 +53,7 @@ export default function Navbar() {
               onClick={() => scrollToSection('deals')}
               className="text-sky-900 hover:text-sky-600 transition-colors font-medium"
             >
-              deals
+              <Link to="/" className="nav-link">deals</Link>
             </button>
           </li>
           <li>
@@ -60,7 +61,7 @@ export default function Navbar() {
               onClick={() => scrollToSection('explore')}
               className="text-sky-900 hover:text-sky-600 transition-colors font-medium"
             >
-              Explore
+              <Link to="/" className="nav-link">Explore</Link>
             </button>
           </li>
           <li>
@@ -68,14 +69,14 @@ export default function Navbar() {
               onClick={() => scrollToSection('places')}
               className="text-sky-900 hover:text-sky-600 transition-colors font-medium"
             >
-              Discover
+              <Link to="/" className="nav-link">Discover</Link>
             </button>
           </li>
           
         </ul>
 
-        <button className="px-6 py-2 bg-sky-600 text-white rounded-full hover:bg-sky-700 transition-colors font-medium">
-          Book Now
+        <button to="/booking" className="px-6 py-2 bg-sky-600 text-white rounded-full hover:bg-sky-700 transition-colors font-medium">
+            <Link to="/booking" >Book Now</Link>
         </button>
       </div>
 
