@@ -10,16 +10,25 @@ html, body, #root {
 }
 
 /* global background that covers the whole page */
-  /* body {
-    margin: 0;
+   /* body {
+    background: linear-gradient(
+    180deg,
+    #b3e5ff 0%,
+    #d2efff 20%,
+    #e7f7ff 45%,
+    #f4fbff 70%,
+    #ffffff 100%
+    ); */
+
+    /* margin: 0;
     background-image: url("/mist2.jpg");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     background-attachment: fixed; /* keeps background fixed while scrolling 
     -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-  } */
+    -moz-osx-font-smoothing: grayscale; */
+  /* }  */
 
 /* Optional: make sections transparent so background shows through */
 section {

@@ -1,220 +1,151 @@
-import React, { useState, useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const places = [
-  {
-    name: "santorini",
-    country: "Greece",
-    description:
-      "Iconic white-washed buildings with blue domes, stunning sunsets, and crystal-clear waters.",
-    image: "/place-img/santorini.jpeg",
-  },
-  {
-    name: "london brige",
-    country: "United Kingdom",
-    description:
-      " Historic bridge over the River Thames, known for its iconic towers and panoramic city views.",
-    image: "/place-img/london-bridge.jpeg",
-  },
-  {
-    name: "christ the redeemer",
-    country: "Brazil",
-    description:
-      "Famous statue overlooking Rio de Janeiro, offering panoramic city and beach views.",
-    image: "/place-img/christ- brazil.jpg",
-  },
-  {
-    name: "Mount fuji",
-    country: "Japan",
-    description:
-      "Iconic snow-capped volcano, a symbol of Japan, popular for hiking and photography.",
-    image: "/place-img/fuji.png",
-  },
-  {
-    name: "Great Wall Of China",
-    country: "China",
-    description:
-      "Ancient fortification stretching thousands of miles, showcasing China's rich history and architectural marvels.",
-    image: "/place-img/image.png",
-  },
-];
+export default function places() {
+  const componentRef = useRef(null); // Scope for the whole component
+  const sliderRef = useRef(null);    // The track that moves horizontally
 
-export default function DestinationSlider() {
-  const [index, setIndex] = useState(0);
-  const imageRef = useRef(null);
-  const detailRef = useRef(null);
+  const places = [
+    { name: "Santorini", image: "/place-img/santorini.jpeg", country: "Greece", description: "Cliffside sunsets and blue domes." },
+    { name: "London Bridge", image: "/place-img/london-bridge.jpeg", country: "UK", description: "Historic bridge with city views." },
+    { name: "Christ the Redeemer", image: "/place-img/christ- brazil.jpg", country: "Brazil", description: "Rio’s iconic mountain statue." },
+    { name: "Mount Fuji", image: "/place-img/fuji.png", country: "Japan", description: "Japan’s most iconic volcano." },
+    { name: "Great Wall", image: "/place-img/image.png", country: "China", description: "Ancient world wonder." },
+  ];
 
-  const nextSlide = () => {
-    animateOut(() => {
-      setIndex((prev) => (prev + 1) % places.length);
-      animateIn();
-    });
-  };
+  useEffect(() => {
+    let ctx = gsap.context(() => {
+      
+      // 1. Get the total width of the content to scroll
+      const panels = gsap.utils.toArray(".slide-panel");
+      const totalWidth = 100 * (panels.length - 1); // Width in percentage
+      
+      // 2. Create the Main Horizontal Scroll Tweet
+      const scrollTween = gsap.to(sliderRef.current, {
+        xPercent: -totalWidth,
+        ease: "none",
+        scrollTrigger: {
+          trigger: componentRef.current,
+          pin: true,
+          scrub: 1,
+          // Adjust 'end' to control how fast the user scrolls through (e.g., +=3000)
+          end: () => "+=" + sliderRef.current.offsetWidth, 
+         // Optional: Snaps to panels
+        }
+      });
 
-  const prevSlide = () => {
-    animateOut(() => {
-      setIndex((prev) =>
-        prev === 0 ? places.length - 1 : prev - 1
-      );
-      animateIn();
-    });
-  };
+      // 3. Parallax/Inner Animations (Linked to the scrollTween)
+      panels.forEach((panel) => {
+        const img = panel.querySelector(".slide-img");
+        const txt = panel.querySelector(".slide-text");
 
-  const animateIn = () => {
-    gsap.fromTo(
-      imageRef.current,
-      { opacity: 0, scale: 0.8 },
-      { opacity: 1, scale: 1, duration: 0.8, ease: "power3.out" }
-    );
-    gsap.fromTo(
-      detailRef.current,
-      { opacity: 0, x: 80 },
-      { opacity: 1, x: 0, duration: 0.8, ease: "power3.out" }
-    );
-  };
+        // Animate Image (Scale effect)
+        gsap.from(img, {
+          scale: 1.3,
+          ease: "none",
+          scrollTrigger: { 
+            trigger: panel,
+            containerAnimation: scrollTween, // Link to horizontal movement
+            start: "left right", // When panel left edge hits viewport right
+            end: "right left",   // When panel right edge hits viewport left
+            scrub: true,
+          }
+        });
 
-  const animateOut = (onComplete) => {
-    gsap.to(imageRef.current, {
-      opacity: 0,
-      scale: 1.05,
-      duration: 0.4,
-      ease: "power3.in",
-      onComplete,
-    });
-    gsap.to(detailRef.current, {
-      opacity: 0,
-      x: -80,
-      duration: 0.4,
-      ease: "power3.in",
-    });
-  };
+        // Animate Text (Fade in/out)
+        gsap.fromTo(txt, 
+          { opacity: 0, x: 100 },
+          { 
+            opacity: 1, 
+            x: 0,
+            ease: "power2.out",
+            scrollTrigger: {
+              trigger: panel,
+              containerAnimation: scrollTween,
+              start: "left center",
+              end: "center center",
+              scrub: true,
+            }
+          }
+        );
+      });
+
+    }, componentRef); // <- Scopes all selectors to this component
+
+    return () => ctx.revert(); // <- CLEANUP: Essential for React
+  }, []);
 
   return (
-    <section id="places"className="destination-slider bg-sky-100">
-      {/* LEFT ARROW + NAME */}
-      <div className="side-control left">
-        <h3>{places[(index - 1 + places.length) % places.length].name}</h3>
-      </div>
-      <button onClick={prevSlide} className="rarrow-btn"><img src="/asserts/arrow.PNG" alt="" srcset="" /></button>
-      {/* MAIN IMAGE */}
-      <div className="center-img">
-        <img
-          ref={imageRef}
-          key={places[index].image}
-          src={places[index].image}
-          alt={places[index].name}
-        />
-      </div>
-
-      {/* RIGHT ARROW + NAME */}
-      <div className="side-control right">
-        <h3>{places[(index + 1) % places.length].name}</h3>
+    <div ref={componentRef} className="scroll-container">
+      {/* The Track that moves */}
+      <div ref={sliderRef} className="scroll-track">
         
-      </div>
-            <button onClick={nextSlide} className="larrow-btn"><img src="/asserts/rarrow.PNG" alt="" srcset="" /></button>
+        {places.map((place, i) => (
+          <div className="slide-panel" key={i}>
+            <div className="image-wrapper">
+              <img src={place.image} alt={place.name} className="slide-img" />
+            </div>
+            <div className="slide-text">
+              <h2 className="text-lg tracking-widest uppercase text-gray-500">{place.country}</h2>
+              <h1 className="text-6xl font-bold mb-4 text-gray-800">{place.name}</h1>
+              <p className="text-xl text-gray-600 max-w-md">{place.description}</p>
+            </div>
+          </div>
+        ))}
 
-      {/* DETAIL PANEL */}
-      <div className="detail-panel" ref={detailRef}>
-        <h1>{places[index].name}</h1>
-        <h2>{places[index].country}</h2>
-        <p>{places[index].description}</p>
       </div>
 
-      {/* STYLES */}
       <style>{`
-        .destination-slider {
-          height: 100vh;
+        .scroll-container {
           width: 100%;
-          margin-left:0px;
-          color: #000;
-          position: relative;
+          height: 100vh;
+          overflow: hidden; /* Hide the scrollbar */
+          background: linear-gradient(180deg, #e3f6ff, #f5fcff);
+        }
+
+        .scroll-track {
           display: flex;
+          height: 100%;
+          width: fit-content; /* Important: lets the track grow based on content */
+        }
+
+        .slide-panel {
+          width: 100vw; /* Each panel takes full viewport width */
+          height: 100vh;
+          display: flex;
+          justify-content: space-around; /* Space between text and image */
           align-items: center;
-          justify-content: center;
+          padding: 0 5vw;
+          box-sizing: border-box;
+          position: relative;
+          flex-shrink: 0; /* Prevent panels from squishing */
         }
 
-        .center-img img {
-          width: 850px;
-          height: 520px;
-          margin-left:-130px;
+        .image-wrapper {
+          width: 50%;
+          height: 70%;
+          overflow: hidden; /* Needed for the internal image scale effect */
+          border-radius: 24px;
+          box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        }
+
+        .slide-img {
+          width: 100%;
+          height: 100%;
           object-fit: cover;
-          border-radius: 20px;
-          box-shadow: 0 20px 40px rgba(0,0,0,0.4);
         }
 
-        .side-control {
-          position: absolute;
-          top: 50%;
-          transform: translateY(-50%);
-          text-align: center;
+        .slide-text {
+          width: 40%;
         }
-
-        .side-control.left {
-          left: 40px;
-        }
-
-        .side-control.right {
-          right: 40px;
-        }
-
-        .side-control h3 {
-          font-size: 22px;
-          margin-bottom: 10px;
-          margin-top: -60px;
-        }
-
-        .rarrow-btn {
-          font-size: 50px;
-          position: absolute;
-          margin-top: 40px;
-          left: 15px;
-          color: grey;
-          width:150px;
-        }
-
-        .larrow-btn {
-          font-size: 50px;
-          position: absolute;
-          margin-top: 40px;
-          right: 10px;
-          color: grey;
-          width:150px;
-        }
-
-        .detail-panel {
-          position: absolute;
-          right: 80px;
-          width: 380px;
-          margin-right:55px;
-        }
-
-        .detail-panel h1 {
-        font-family: 'Arial Black', sans-serif;
-          font-size: 40px;
-          font-weight: bold;
-          margin-top: -10px;
-          width: 450px;
-          color: #222;
-        }
-
-        .detail-panel h2 {
-          margin-top: 20px;
-          font-size: 22px;
-          color: #555;
-        }
-
-        .detail-panel p {
-          margin-top: 20px;
-          font-size: 18px;
-          color: #333;
-          line-height: 1.5;
-          font-weight: bold;
-          width: 370px;
-        }
+        
+        /* Typography utility mimics (if you don't have Tailwind) */
+        h1 { margin: 0; line-height: 1.1; }
+        h2 { margin: 0 0 10px 0; }
       `}</style>
-    </section>
+    </div>
   );
 }

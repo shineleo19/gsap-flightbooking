@@ -46,7 +46,7 @@ export default function FlightDeal() {
   }, []);
 
   return (
-    <div className="sf-page"> 
+    <div className="sf-page" > 
       <main className="sf-main">
         <section className="sf-hero">
           <div className="hero-left">
@@ -107,10 +107,11 @@ export default function FlightDeal() {
         *{box-sizing:border-box}
         /* ensure the flight deals page fills the viewport */
         .sf-page{
+        background: linear-gradient(180deg,#a4e0ff 0%,#c4ecff 100%);
+          margin-top:-6px;
           min-height:91vh;
           display:flex;
           flex-direction:column;
-          background:linear-gradient(180deg,#f6fbff,#eaf6ff);
           color:#043049;
           position:relative;
           overflow:hidden; /* avoid overflow from decorative clouds */
@@ -150,6 +151,7 @@ export default function FlightDeal() {
           width:520px;
           position: absolute;
           pointer-events: none;
+          z-index: 50;
         }
 
         .rights-cloud{
@@ -159,6 +161,7 @@ export default function FlightDeal() {
           position: absolute;
           pointer-events: none;
           overflow-x: hidden;
+          z-index: 0;
         }
 
 

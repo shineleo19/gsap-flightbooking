@@ -66,12 +66,9 @@ export default function Hero() {
       id="hero"
       ref={heroRef}
       className="relative h-screen flex items-center justify-center overflow-hidden"
-      style={{
-        backgroundImage: 'url("/mist2.jpg")',
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        backgroundRepeat: 'no-repeat'
-      }}
+       style={{
+        background: 'linear-gradient(180deg,#89d3ff 0%,#a4e0ff 100%)',
+       }}
     >
       <img
         src="/asserts/plane.png"

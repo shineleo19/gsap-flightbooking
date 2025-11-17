@@ -8,6 +8,7 @@ import FlightDeal from "./components/flightdeal";
 import Explore from "./components/Explore";
 import Places from "./components/places";
 import Booking from "./components/booking";
+import Contact from "./components/contact";
 
 export default function App() {
   return (
@@ -27,6 +28,7 @@ export default function App() {
               <div id="deals"><FlightDeal /></div>
               <div id="explore"><Explore /></div>
               <div id="discover"><Places /></div>
+              <div id="contact"><Contact /></div>
             </>
           }
         />
@@ -36,6 +38,7 @@ export default function App() {
         <Route path="/explore" element={<Explore />} />
         <Route path="/deals" element={<FlightDeal />} />
         <Route path="/places" element={<Places />} />
+        
 
       </Routes>
     </HashRouter>
