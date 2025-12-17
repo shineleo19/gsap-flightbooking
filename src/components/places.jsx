@@ -1,150 +1,138 @@
-import React, { useEffect, useRef } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import React from "react";
 
-gsap.registerPlugin(ScrollTrigger);
-
-export default function places() {
-  const componentRef = useRef(null); // Scope for the whole component
-  const sliderRef = useRef(null);    // The track that moves horizontally
-
+export default function PlacesList() {
   const places = [
     { name: "Santorini", image: "/place-img/santorini.jpeg", country: "Greece", description: "Cliffside sunsets and blue domes." },
     { name: "London Bridge", image: "/place-img/london-bridge.jpeg", country: "UK", description: "Historic bridge with city views." },
-    { name: "Christ the Redeemer", image: "/place-img/christ- brazil.jpg", country: "Brazil", description: "Rio’s iconic mountain statue." },
+    { name: "Christ the Redeemer", image: "/place-img/christ-brazil.jpg", country: "Brazil", description: "Rio’s iconic mountain statue." },
     { name: "Mount Fuji", image: "/place-img/fuji.png", country: "Japan", description: "Japan’s most iconic volcano." },
     { name: "Great Wall", image: "/place-img/image.png", country: "China", description: "Ancient world wonder." },
   ];
 
-  useEffect(() => {
-    let ctx = gsap.context(() => {
-      
-      // 1. Get the total width of the content to scroll
-      const panels = gsap.utils.toArray(".slide-panel");
-      const totalWidth = 100 * (panels.length - 1); // Width in percentage
-      
-      // 2. Create the Main Horizontal Scroll Tweet
-      const scrollTween = gsap.to(sliderRef.current, {
-        xPercent: -totalWidth,
-        ease: "none",
-        scrollTrigger: {
-          trigger: componentRef.current,
-          pin: true,
-          scrub: 1,
-          // Adjust 'end' to control how fast the user scrolls through (e.g., +=3000)
-          end: () => "+=" + sliderRef.current.offsetWidth, 
-         // Optional: Snaps to panels
-        }
-      });
-
-      // 3. Parallax/Inner Animations (Linked to the scrollTween)
-      panels.forEach((panel) => {
-        const img = panel.querySelector(".slide-img");
-        const txt = panel.querySelector(".slide-text");
-
-        // Animate Image (Scale effect)
-        gsap.from(img, {
-          scale: 1.3,
-          ease: "none",
-          scrollTrigger: { 
-            trigger: panel,
-            containerAnimation: scrollTween, // Link to horizontal movement
-            start: "left right", // When panel left edge hits viewport right
-            end: "right left",   // When panel right edge hits viewport left
-            scrub: true,
-          }
-        });
-
-        // Animate Text (Fade in/out)
-        gsap.fromTo(txt, 
-          { opacity: 0, x: 100 },
-          { 
-            opacity: 1, 
-            x: 0,
-            ease: "power2.out",
-            scrollTrigger: {
-              trigger: panel,
-              containerAnimation: scrollTween,
-              start: "left center",
-              end: "center center",
-              scrub: true,
-            }
-          }
-        );
-      });
-
-    }, componentRef); // <- Scopes all selectors to this component
-
-    return () => ctx.revert(); // <- CLEANUP: Essential for React
-  }, []);
-
   return (
-    <div ref={componentRef} className="scroll-container">
-      {/* The Track that moves */}
-      <div ref={sliderRef} className="scroll-track">
-        
+    <div className="page-container">
+      <div className="content-wrapper">
+        <header className="page-header">
+          <h1>World Destinations</h1>
+          <p>Scroll down to explore</p>
+        </header>
+
         {places.map((place, i) => (
-          <div className="slide-panel" key={i}>
+          <div className="place-card" key={i}>
+            {/* Image Side */}
             <div className="image-wrapper">
-              <img src={place.image} alt={place.name} className="slide-img" />
+              <img src={place.image} alt={place.name} className="place-img" />
             </div>
-            <div className="slide-text">
-              <h2 className="text-lg tracking-widest uppercase text-gray-500">{place.country}</h2>
-              <h1 className="text-6xl font-bold mb-4 text-gray-800">{place.name}</h1>
-              <p className="text-xl text-gray-600 max-w-md">{place.description}</p>
+            
+            {/* Text Side */}
+            <div className="text-wrapper">
+              <h2 className="country-label">{place.country}</h2>
+              <h1 className="place-name">{place.name}</h1>
+              <p className="description">{place.description}</p>
             </div>
           </div>
         ))}
-
       </div>
 
       <style>{`
-        .scroll-container {
-          width: 100%;
-          height: 100vh;
-          overflow: hidden; /* Hide the scrollbar */
-          background: linear-gradient(180deg, #e3f6ff, #f5fcff);
+        /* Reset */
+        body, html { margin: 0; padding: 0; font-family: sans-serif; }
+
+        .page-container {
+          min-height: 100vh;
+          background: linear-gradient(180deg, #e3f6ff 0%, #ffffff 100%);
+          padding: 80px 20px;
         }
 
-        .scroll-track {
-          display: flex;
-          height: 100%;
-          width: fit-content; /* Important: lets the track grow based on content */
+        .content-wrapper {
+          max-width: 1200px;
+          margin: 0 auto;
         }
 
-        .slide-panel {
-          width: 100vw; /* Each panel takes full viewport width */
-          height: 100vh;
+        .page-header {
+          text-align: center;
+          margin-bottom: 80px;
+          color: #334155;
+        }
+        .page-header h1 { font-size: 3rem; margin-bottom: 10px; }
+        .page-header p { font-size: 1.2rem; color: #64748b; }
+
+        /* Card Styles */
+        .place-card {
           display: flex;
-          justify-content: space-around; /* Space between text and image */
           align-items: center;
-          padding: 0 5vw;
-          box-sizing: border-box;
-          position: relative;
-          flex-shrink: 0; /* Prevent panels from squishing */
+          gap: 60px;
+          margin-bottom: 120px; /* Space between items */
+        }
+
+        /* Alternate layout: Even items have image on the right */
+        .place-card:nth-child(even) {
+          flex-direction: row-reverse;
         }
 
         .image-wrapper {
-          width: 50%;
-          height: 70%;
-          overflow: hidden; /* Needed for the internal image scale effect */
+          flex: 1;
+          height: 400px;
           border-radius: 24px;
-          box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+          overflow: hidden;
+          box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+          transition: transform 0.3s ease;
         }
 
-        .slide-img {
+        .image-wrapper:hover {
+          transform: translateY(-10px); /* Subtle hover effect */
+        }
+
+        .place-img {
           width: 100%;
           height: 100%;
           object-fit: cover;
         }
 
-        .slide-text {
-          width: 40%;
+        .text-wrapper {
+          flex: 1;
+          padding: 20px;
         }
-        
-        /* Typography utility mimics (if you don't have Tailwind) */
-        h1 { margin: 0; line-height: 1.1; }
-        h2 { margin: 0 0 10px 0; }
+
+        .country-label {
+          font-size: 0.9rem;
+          text-transform: uppercase;
+          letter-spacing: 4px;
+          color: #64748b;
+          margin-bottom: 10px;
+        }
+
+        .place-name {
+          font-size: 3.5rem;
+          font-weight: 800;
+          color: #1e293b;
+          margin: 0 0 20px 0;
+          line-height: 1.1;
+        }
+
+        .description {
+          font-size: 1.25rem;
+          color: #475569;
+          line-height: 1.6;
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+          .place-card, .place-card:nth-child(even) {
+            flex-direction: column; /* Stack vertically on phone */
+            gap: 30px;
+            margin-bottom: 80px;
+          }
+
+          .image-wrapper {
+            width: 100%;
+            height: 300px;
+          }
+
+          .place-name {
+            font-size: 2.5rem;
+          }
+        }
       `}</style>
     </div>
   );
