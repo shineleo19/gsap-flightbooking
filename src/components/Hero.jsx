@@ -10,6 +10,7 @@ gsap.registerPlugin(ScrollTrigger, MotionPathPlugin)
 
 export default function Hero() {
   const heroRef = useRef(null)
+  const asset = (fileName) => `${import.meta.env.BASE_URL}asserts/${fileName}`
 
   useGSAP(() => {
     // dynamically import SplitText (avoids bundler errors if plugin isn't available)
@@ -71,7 +72,7 @@ export default function Hero() {
        }}
     >
       <img
-        src="/asserts/plane.png"
+        src={asset('plane.png')}
         alt="plane"
         className="plane absolute top-1/2 transform -translate-y-1/2 w-36 md:w-48 lg:w-64 z-50 pointer-events-none"
         style={{ left: '-17vw' }}

@@ -6,6 +6,8 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
 gsap.registerPlugin(ScrollTrigger)
 export default function Contact() {
+  const asset = (fileName) => `${import.meta.env.BASE_URL}asserts/${fileName}`
+
   useGSAP(() => {
   const tl = gsap.timeline({
     scrollTrigger: {
@@ -29,20 +31,20 @@ export default function Contact() {
 
       {/* LEFT DECORATION */}
       <img
-        src="/asserts/lefttree.png"   // ⬅️ replace with your asset
+        src={asset('lefttree.png')}   // ⬅️ replace with your asset
         alt="left decoration"
         className="contact-left-decor"
       />
 
       {/* RIGHT DECORATION */}
       <img
-        src="/asserts/righttree.png"  // ⬅️ replace with your asset
+        src={asset('righttree.png')}  // ⬅️ replace with your asset
         alt="right decoration"
         className="contact-right-decor"
       />
         {/* GROUND IMAGE */}
         <img
-        src="/asserts/ground.png"  // ⬅️ replace with your asset
+        src={asset('ground.png')}  // ⬅️ replace with your asset
         alt="ground decoration"
         className="contact-ground"
       />
@@ -68,7 +70,7 @@ export default function Contact() {
 
           {/* RIGHT CONTACT FORM */}
           <img
-        src="/asserts/plane.png"
+            src={asset('plane.png')}
         alt="plane"
         className="planes absolute top-1/2 w-36 md:w-48 lg:w-64 z-50 pointer-events-none"
         style={{ right: '-17vw' ,

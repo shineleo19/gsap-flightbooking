@@ -8,6 +8,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 const Explore = () => {
   const isMobile = useMediaQuery({ maxWidth: 767 });
+  const asset = (fileName) => `${import.meta.env.BASE_URL}asserts/${fileName}`;
 
   useGSAP(() => {
     const start = isMobile ? "top 20%" : "top top";
@@ -45,7 +46,10 @@ const Explore = () => {
             className="cocktail-img masked-img"
             role="img"
             aria-label="Explore image"
-            style={{ backgroundImage: 'url("https://picsum.photos/600/400")' }}
+            style={{
+              backgroundImage: 'url("https://picsum.photos/600/400")',
+              '--flight-mask': `url("${asset('flight.png')}")`,
+            }}
           />
 
           {/* RIGHT DESTINATIONS LIST */}
@@ -57,12 +61,12 @@ const Explore = () => {
           <h2 className="will-fade  text-center text-4xl -mt-10 font-bold text-sky-800">Your Next Adventure Awaits</h2>
           
           <div id="masked-content">
-            <img src="/asserts/statue of liberty.PNG" className="  absolute -left-0 top-72 w-60 " style={{Width:'200px'}}/>
+            <img src={asset('statue%20of%20liberty.PNG')} className="  absolute -left-0 top-72 w-60 " style={{Width:'200px'}}/>
             <h3 className="text-2xl font-semibold">Handpicked • Stunning • Unforgettable</h3>
             <p className="mt-2 text-gray-600">
               Book exclusive flight deals and discover breathtaking destinations curated just for you.
             </p>
-            <img src="/asserts/eiffel.JPG" className="  absolute -right-0 top-72 w-60 " style={{Width:'200px'}}/>
+            <img src={asset('eiffel.JPG')} className="  absolute -right-0 top-72 w-60 " style={{Width:'200px'}}/>
           </div>
         </div>
       </div>
@@ -94,11 +98,11 @@ const Explore = () => {
 
         /* mask applied to the element using proper URL and vendor prefix */
         .masked-img {
-          -webkit-mask-image: url("/asserts/flight.png");
+          -webkit-mask-image: var(--flight-mask);
           -webkit-mask-repeat: no-repeat;
           -webkit-mask-position: center;
           -webkit-mask-size: 50%;
-          mask-image: url("/asserts/flight.png");
+          mask-image: var(--flight-mask);
           mask-repeat: no-repeat;
           mask-position: center;
           mask-size: 50%;
